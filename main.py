@@ -2,8 +2,10 @@ import streamlit as st
 from openai import OpenAI
 import os
 import io
-import PyPDF2
+import PyPDF2 # to read PDF files
 from dotenv import load_dotenv
+import time
+from time import sleep # to create animation effect
 
 # Load environment variables from .env file
 load_dotenv()
@@ -63,19 +65,26 @@ if analyze_button and uploaded_file:
         client = OpenAI(api_key=OPENAI_API_KEY) # Initialize OpenAI client to access the API
         # Call OpenAI API to get feedback
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="o4-mini",
             messages=[
                 {"role": "system", "content": "You are an expert resume reviewer, Analyze the resume and provide feedback."},
                 {"role": "user", "content": prompt}
-            ],
-            max_tokens=1500, # Adjust max tokens based on your needs
-            temperature=0.7 # Adjust temperature for creativity
+            ]
         )
+        progress_bar = st.progress(0)
+
+        # Update it to create animation effect
+        for percent_complete in range(100):
+            time.sleep(0.1)
+            progress_bar.progress(percent_complete + 1)
+        st.success("Analysis complete!")
         st.markdown("### Feedback:") # Display feedback header
-        st.markdown(response.choices[0].message['content']) # Display the feedback
+        st.markdown(response.choices[0].message.content) # Display the feedback
     
     except Exception as e:
         st.error(f"An error occurred: {e}")
+        st.stop()
+
 # Add a footer
 st.markdown("Made with ❤️ by Jai Chaudhary")
 # Add a link to the GitHub repository
