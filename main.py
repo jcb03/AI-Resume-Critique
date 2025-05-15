@@ -11,9 +11,9 @@ from time import sleep # to create animation effect
 load_dotenv()
 
 #set page configuration
-st.set_page_config(page_title="AI Resume Critiquer",page_icon="📄",layout="centered")
+st.set_page_config(page_title="AI Resume Analyzer",page_icon="📄",layout="centered")
 
-st.title("AI Resume Critiquer") # Set the title of the app
+st.title("AI Resume Analyzer") # Set the title of the app
 st.markdown("Upload your resume in PDF format and get feedback on how to improve it.")
 
 # Initialize OpenAI API
