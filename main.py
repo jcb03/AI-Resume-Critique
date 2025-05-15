@@ -25,9 +25,6 @@ st.markdown("Get feedback on your resume and ATS score based on the job role you
 
 # Initialize OpenAI API
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if OPENAI_API_KEY is None:
-    st.error("Please set your OpenAI API key in the .env file.")
-    st.stop()
 
 uploaded_file = st.file_uploader("Upload your resume (PDF | TXT)", type=["pdf","txt"]) 
 job_role= st.text_input("Enter the job role you are applying for (e.g., Software Engineer, Data Scientist):")
