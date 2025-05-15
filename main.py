@@ -28,16 +28,28 @@ analyze_button = st.button("Analyze Resume")
 # Function to extract text from a PDF file
 def extract_text_from_pdf(file):
     """Extract text from a PDF file."""
+    reader = PyPDF2.PdfReader(file)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text()
+    return text
+    
+# Function to extract text from uploaded file
+def extract_text_from_file(uploaded_file):
     if uploaded_file.type == "application/pdf":
-        reader = PyPDF2.PdfReader(file)
-        text = ""
-        for page in reader.pages:
-            text += page.extract_text()
-        return text
+        return extract_text_from_pdf(io.BytesIO(uploaded_file.read())) # Read PDF file
+    return uploaded_file.read().decode("utf-8") # Checking if the file is a text file
 
 if analyze_button and uploaded_file:
     try:
-        file_content=
+        file_content= extract_text_from_file(uploaded_file)
+
+        if not file_content.strip():
+            st.error("The uploaded file is empty or not readable.")
+            st.stop()
+
+
+
 
 
 
