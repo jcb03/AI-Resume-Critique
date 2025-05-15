@@ -67,14 +67,18 @@ if analyze_button and uploaded_file:
             messages=[
                 {"role": "system", "content": "You are an expert resume reviewer, Analyze the resume and provide feedback."},
                 {"role": "user", "content": prompt}
-                ],
-                max_tokens=1500, # Adjust max tokens based on your needs
-                temperature=0.7 # Adjust temperature for creativity
-                )
-
-
-
-
-
-
-
+            ],
+            max_tokens=1500, # Adjust max tokens based on your needs
+            temperature=0.7 # Adjust temperature for creativity
+        )
+        st.markdown("### Feedback:") # Display feedback header
+        st.markdown(response.choices[0].message['content']) # Display the feedback
+    
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+# Add a footer
+st.markdown("Made with ❤️ by Jai Chaudhary")
+# Add a link to the GitHub repository
+st.markdown("Checkout my github repository [Github-jcb03](https://github.com/jcb03/AI-Resume-Critique)")
+# Add a link to the LinkedIn profile
+st.markdown("Connect with me on [LinkedIn-Jai Chaudhary](https://www.linkedin.com/in/jai-chaudhary-54bb86221/)")
