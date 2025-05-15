@@ -11,7 +11,7 @@ load_dotenv()
 #set page configuration
 st.set_page_config(page_title="AI Resume Critiquer",page_icon="📄",layout="centered")
 
-st.title("AI Resume Critiquer")
+st.title("AI Resume Critiquer") # Set the title of the app
 st.markdown("Upload your resume in PDF format and get feedback on how to improve it.")
 
 # Initialize OpenAI API
