@@ -11,10 +11,17 @@ from time import sleep # to create animation effect
 load_dotenv()
 
 #set page configuration
-st.set_page_config(page_title="AI Resume Analyzer",page_icon="📄",layout="centered")
+st.set_page_config(page_title="CVSage",page_icon="📄",layout="centered")
 
-st.title("AI Resume Analyzer") # Set the title of the app
-st.markdown("Upload your resume in PDF format and get feedback on how to improve it.")
+# Create three columns with the middle one for content
+left_col, center_col, right_col = st.columns([1, 1, 1])
+
+# Place title and description in the center column
+with center_col:
+    st.title("CVSage")
+
+st.markdown("Upload your resume in PDF format")
+st.markdown("Get feedback on your resume and ATS score based on the job role you are applying for.")
 
 # Initialize OpenAI API
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -51,13 +58,16 @@ if analyze_button and uploaded_file:
             st.stop()
 
         # Initialize prompt
-        prompt = f"""Please analyze this resume and provide constructive feedback according to the job role if mentioned.
+        prompt = f"""Please analyze this resume and provide ATS score and constructive feedback according to the job role if mentioned.
         Focus on the following aspects:
+
         1. Content clarity and impact
         2. Skills presentation
         3. Experience descriptions
         4. Formatting and layout
         5. Specific improvements for {job_role if job_role else 'general job applications'}
+        6. ATS compatibility
+        7. Accurate ATS score
 
         resume content:
         {file_content}
