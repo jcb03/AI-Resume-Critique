@@ -1,6 +1,6 @@
 import streamlit as st
 from openai import OpenAI
-import os
+#import os
 import io
 import PyPDF2 # to read PDF files
 from dotenv import load_dotenv
@@ -8,7 +8,7 @@ import time
 from time import sleep # to create animation effect
 
 # Load environment variables from .env file
-load_dotenv()
+#load_dotenv()
 
 #set page configuration
 st.set_page_config(page_title="CVSage",page_icon="📄",layout="centered")
@@ -24,7 +24,9 @@ st.markdown("Upload your resume in PDF format")
 st.markdown("Get feedback on your resume and ATS score based on the job role you are applying for.")
 
 # Initialize OpenAI API
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+#OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+
 
 uploaded_file = st.file_uploader("Upload your resume (PDF | TXT)", type=["pdf","txt"]) 
 job_role= st.text_input("Enter the job role you are applying for (e.g., Software Engineer, Data Scientist):")
